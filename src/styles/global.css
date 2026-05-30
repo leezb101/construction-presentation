@@ -1,21 +1,24 @@
 :root {
   color-scheme: light;
-  --bg: #f8fbff;
-  --bg-strong: #eef6ff;
-  --card: rgba(255, 255, 255, 0.86);
-  --card-strong: rgba(255, 255, 255, 0.96);
-  --line: rgba(148, 163, 184, 0.22);
-  --text: #0f172a;
-  --muted: #475569;
-  --primary: #2563eb;
-  --primary-soft: rgba(37, 99, 235, 0.12);
-  --teal: #14b8a6;
+  --bg: #f7fcff;
+  --bg-strong: #edf8ff;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --card: rgba(255, 255, 255, 0.92);
+  --card-strong: rgba(255, 255, 255, 0.985);
+  --line: rgba(125, 164, 206, 0.18);
+  --text: #10243e;
+  --muted: #4d6580;
+  --primary: #0ea5e9;
+  --primary-soft: rgba(14, 165, 233, 0.12);
+  --teal: #22c1c3;
   --orange: #f59e0b;
   --danger: #ef4444;
-  --shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+  --shadow: 0 22px 60px rgba(52, 104, 168, 0.09);
   --radius-lg: 28px;
   --radius-md: 20px;
   --radius-sm: 14px;
+  --nav-offset: 118px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -28,15 +31,18 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-offset);
+  scroll-snap-type: y proximity;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 26%),
-    radial-gradient(circle at 85% 8%, rgba(20, 184, 166, 0.12), transparent 20%),
-    linear-gradient(180deg, #fcfeff 0%, #f4f9ff 48%, #ffffff 100%);
+    radial-gradient(circle at 12% 10%, rgba(14, 165, 233, 0.12), transparent 22%),
+    radial-gradient(circle at 88% 12%, rgba(34, 193, 195, 0.1), transparent 18%),
+    radial-gradient(circle at 50% 40%, rgba(186, 230, 253, 0.28), transparent 34%),
+    linear-gradient(180deg, #fbfeff 0%, #f3fbff 42%, #ffffff 100%);
   color: var(--text);
   font-family: "Source Sans 3", sans-serif;
 }
@@ -62,6 +68,13 @@ select {
   overflow-x: hidden;
 }
 
+.top-nav-shell {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  padding-top: 18px;
+}
+
 .page-glow {
   position: fixed;
   z-index: 0;
@@ -76,28 +89,27 @@ select {
 .page-glow--left {
   top: 8rem;
   left: -10rem;
-  background: rgba(37, 99, 235, 0.18);
+  background: rgba(14, 165, 233, 0.16);
 }
 
 .page-glow--right {
   top: 16rem;
   right: -8rem;
-  background: rgba(20, 184, 166, 0.14);
+  background: rgba(34, 193, 195, 0.12);
 }
 
 .top-nav {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   width: min(1180px, calc(100% - 32px));
-  margin: 20px auto 0;
+  margin: 0 auto;
   padding: 16px 18px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(16px);
   border-radius: 999px;
   box-shadow: var(--shadow);
@@ -157,13 +169,30 @@ main {
   position: relative;
   z-index: 1;
   width: min(1180px, calc(100% - 32px));
-  margin: 0 auto;
+  margin: 14px auto 0;
   padding-bottom: 72px;
+}
+
+.scroll-deck {
+  display: grid;
+  gap: 28px;
 }
 
 .hero,
 .section {
-  padding: 84px 0 24px;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: calc(100vh - var(--nav-offset));
+  padding: 84px 36px 36px;
+  margin-top: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(247, 251, 255, 0.78)),
+    radial-gradient(circle at top right, rgba(191, 219, 254, 0.24), transparent 28%);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 40px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
 }
 
 .hero {
@@ -171,7 +200,7 @@ main {
   grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
   align-items: center;
   gap: 42px;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - var(--nav-offset));
 }
 
 .pill,
@@ -228,7 +257,7 @@ main {
 
 .hero-highlights div {
   padding: 16px 18px;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.92);
   border-radius: 18px;
 }
@@ -263,8 +292,8 @@ main {
   min-height: 420px;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.94)),
-    linear-gradient(135deg, rgba(37, 99, 235, 0.04), rgba(20, 184, 166, 0.03));
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(242, 250, 255, 0.96)),
+    linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(34, 193, 195, 0.04));
 }
 
 .hero-stage__grid {
@@ -342,7 +371,7 @@ main {
   min-width: 180px;
   padding: 18px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(148, 163, 184, 0.15);
 }
 
@@ -369,7 +398,7 @@ main {
 .value-card,
 .machine-summary__card {
   padding: 22px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 251, 255, 0.92));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(246, 251, 255, 0.95));
 }
 
 .metric-card span,
@@ -483,7 +512,7 @@ main {
   padding: 18px;
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.95);
   text-align: left;
   transition:
     transform 180ms ease,
@@ -559,7 +588,7 @@ main {
   gap: 12px;
   width: 100%;
   padding: 16px 18px;
-  background: rgba(255, 255, 255, 0.84);
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(148, 163, 184, 0.14);
   border-radius: 18px;
   text-align: left;
@@ -623,7 +652,7 @@ main {
   height: 220px;
   margin-top: 22px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.93);
   border: 1px solid rgba(148, 163, 184, 0.12);
   overflow: hidden;
 }
@@ -700,7 +729,7 @@ main {
   padding: 14px;
   border-radius: 24px;
   border: 1px solid rgba(148, 163, 184, 0.14);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.96);
   font-family: "Lexend", sans-serif;
 }
 
@@ -821,6 +850,10 @@ main {
 }
 
 @media (max-width: 860px) {
+  :root {
+    --nav-offset: 146px;
+  }
+
   .top-nav {
     flex-direction: column;
     align-items: stretch;
@@ -848,9 +881,20 @@ main {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --nav-offset: 158px;
+  }
+
   .top-nav,
   main {
     width: min(100% - 20px, 1180px);
+  }
+
+  .hero,
+  .section {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 28px;
   }
 
   .hero,
@@ -859,7 +903,7 @@ main {
   }
 
   .hero {
-    min-height: auto;
+    min-height: calc(100vh - var(--nav-offset));
   }
 
   .hero h1 {

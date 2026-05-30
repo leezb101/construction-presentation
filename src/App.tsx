@@ -14,8 +14,10 @@ export default function App() {
     <div className="app-shell">
       <div className="page-glow page-glow--left" aria-hidden="true" />
       <div className="page-glow page-glow--right" aria-hidden="true" />
-      <TopNav items={navItems} />
-      <main>
+      <div className="top-nav-shell">
+        <TopNav items={navItems} />
+      </div>
+      <main className="scroll-deck">
         <HeroSection />
         <PainPointsSection />
         <SolutionSection />
