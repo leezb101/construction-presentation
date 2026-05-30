@@ -1,6 +1,12 @@
 import type { NavItem } from "../../types";
 
-export function TopNav({ items }: { items: NavItem[] }) {
+export function TopNav({
+  items,
+  activeId,
+}: {
+  items: NavItem[];
+  activeId: string;
+}) {
   return (
     <header className="top-nav">
       <div className="brand-mark">
@@ -12,7 +18,12 @@ export function TopNav({ items }: { items: NavItem[] }) {
       </div>
       <nav>
         {items.map((item) => (
-          <a key={item.id} href={`#${item.id}`}>
+          <a
+            key={item.id}
+            href={`#${item.id}`}
+            className={item.id === activeId ? "is-active" : ""}
+            aria-current={item.id === activeId ? "location" : undefined}
+          >
             {item.label}
           </a>
         ))}
