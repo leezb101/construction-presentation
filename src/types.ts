@@ -29,6 +29,23 @@ export type ProjectPhaseStep = {
   signals: string[];
 };
 
+export type WorkflowAnimationVariant =
+  | "fence"
+  | "archive"
+  | "check-in"
+  | "monitor"
+  | "events"
+  | "settlement";
+
+export type WorkflowDemoScene = {
+  stepId: string;
+  sceneTitle: string;
+  statusText: string;
+  resultMetrics: string[];
+  actors: string[];
+  animationVariant: WorkflowAnimationVariant;
+};
+
 export type SafetyEvent = {
   id: string;
   state: string;
