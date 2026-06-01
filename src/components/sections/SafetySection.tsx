@@ -1,21 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { safetyEvents } from "../../data/content";
 import { Section } from "../common";
 import { SafetyMonitorDemo } from "../visuals/SafetyMonitorDemo";
 
 export function SafetySection() {
   const [activeEventId, setActiveEventId] = useState(safetyEvents[0].id);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveEventId((current) => {
-        const index = safetyEvents.findIndex((event) => event.id === current);
-        return safetyEvents[(index + 1) % safetyEvents.length].id;
-      });
-    }, 3200);
-
-    return () => window.clearInterval(timer);
-  }, []);
 
   return (
     <Section

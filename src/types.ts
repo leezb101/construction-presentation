@@ -83,11 +83,16 @@ export type TrendPoint = {
 };
 
 export type ResourcePoolFlow = {
+  id: string;
+  title: string;
+  summary: string;
   from: string;
   to: string;
   type: "人员池" | "帽子池" | "机械池";
   count: number;
   note: string;
+  rule: string;
+  status: string;
 };
 
 export type ValueMetric = {
