@@ -612,7 +612,7 @@ main {
   overflow: hidden;
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.92);
-  background: linear-gradient(180deg, rgba(235, 247, 255, 0.96), rgba(247, 251, 255, 0.98));
+  background: linear-gradient(180deg, rgba(234, 246, 255, 0.98), rgba(246, 251, 255, 0.98));
   box-shadow: var(--shadow);
 }
 
@@ -621,6 +621,28 @@ main {
   min-height: 348px;
   padding: 24px;
   overflow: hidden;
+}
+
+.workflow-stage__wash {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+.workflow-stage__wash--a {
+  top: 12px;
+  left: 16px;
+  width: 176px;
+  height: 176px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent 72%);
+}
+
+.workflow-stage__wash--b {
+  right: -8px;
+  bottom: 22px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.14), transparent 70%);
 }
 
 .workflow-stage__grid {
@@ -666,6 +688,7 @@ main {
 .workflow-actors span {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   padding: 8px 10px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
@@ -676,6 +699,15 @@ main {
 
 .workflow-actors span {
   background: rgba(236, 248, 255, 0.94);
+}
+
+.workflow-actors .wf-glyph {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.09);
+  color: var(--primary);
 }
 
 .wf-anim {
@@ -743,6 +775,10 @@ main {
   animation: wf-rise-in 260ms ease-out 120ms both;
 }
 
+.wf-anim--fill-bar {
+  animation: wf-fill-bar 820ms ease-out 680ms both;
+}
+
 .wf-anim--tilt-out {
   animation: wf-tilt-alert 720ms ease-out 280ms both;
 }
@@ -755,28 +791,39 @@ main {
   animation: wf-slide-in 420ms ease-out 980ms both;
 }
 
-.wf-map {
-  inset: 38px 34px 82px;
-  border-radius: 28px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(217, 241, 255, 0.42)),
-    radial-gradient(circle at 18% 20%, rgba(14, 165, 233, 0.1), transparent 20%);
+.wf-anim--draw-stroke {
+  animation: wf-stroke-draw 900ms ease-out 220ms both;
 }
 
-.wf-fence-line {
-  inset: 70px 68px 118px;
-  border: 2px dashed rgba(14, 165, 233, 0.45);
-  border-radius: 34px 60px 44px 58px;
+.wf-anim--draw-stroke-delayed {
+  animation: wf-stroke-draw 900ms ease-out 520ms both;
 }
 
-.wf-fence-tag,
-.wf-status-pill,
-.wf-check-badge,
-.wf-monitor-label,
-.wf-events-state,
-.wf-ledger-card {
+.wf-anim--ring-pair span:first-child {
+  animation: wf-ring-expand 760ms ease-out 760ms both;
+}
+
+.wf-anim--ring-pair span:last-child {
+  animation: wf-ring-expand 760ms ease-out 940ms both;
+}
+
+.wf-glyph {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+}
+
+.wf-glyph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   justify-content: center;
   padding: 10px 14px;
   border-radius: 999px;
@@ -786,24 +833,92 @@ main {
   box-shadow: 0 10px 24px rgba(52, 104, 168, 0.08);
 }
 
-.wf-fence-tag {
+.wf-badge--top {
   top: 46px;
   right: 42px;
 }
 
-.wf-fence-route {
-  left: 84px;
-  right: 128px;
-  bottom: 122px;
-  height: 10px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(14, 165, 233, 0.7), rgba(34, 193, 195, 0.44));
+.wf-badge--bottom {
+  right: 32px;
+  bottom: 54px;
 }
 
-.wf-person-card,
-.wf-doc-card,
-.wf-events-card,
-.wf-summary-card {
+.wf-badge--bottom-right {
+  right: 36px;
+  bottom: 42px;
+}
+
+.wf-badge--bottom-center {
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  min-width: 188px;
+}
+
+.wf-badge--warning {
+  color: #b45309;
+}
+
+.wf-svg,
+.wf-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wf-map-panel,
+.wf-monitor-zone {
+  position: absolute;
+  inset: 34px 24px 86px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(225, 242, 255, 0.5)),
+    radial-gradient(circle at 18% 20%, rgba(14, 165, 233, 0.08), transparent 26%);
+  border: 1px solid rgba(125, 164, 206, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.wf-road {
+  fill: none;
+  stroke: rgba(148, 184, 214, 0.5);
+  stroke-linecap: round;
+  stroke-width: 13;
+}
+
+.wf-route {
+  --wf-dash: 400;
+  fill: none;
+  stroke: rgba(37, 99, 235, 0.86);
+  stroke-linecap: round;
+  stroke-width: 8;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+}
+
+.wf-fence-shape {
+  --wf-dash: 620;
+  fill: rgba(56, 189, 248, 0.08);
+  stroke: rgba(37, 99, 235, 0.58);
+  stroke-width: 3.2;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+}
+
+.wf-fence-shape--monitor {
+  fill: rgba(20, 184, 166, 0.08);
+  stroke: rgba(20, 184, 166, 0.5);
+}
+
+.wf-pin {
+  fill: #0ea5e9;
+}
+
+.wf-scene-chip,
+.wf-info-card,
+.wf-mini-card,
+.wf-metric-card,
+.wf-status-rail {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 12px;
@@ -814,55 +929,122 @@ main {
   box-shadow: 0 16px 32px rgba(52, 104, 168, 0.08);
 }
 
-.wf-person-card {
-  top: 44px;
+.wf-scene-chip {
+  top: 38px;
   left: 28px;
+  display: inline-flex;
+  width: auto;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.wf-mini-card {
+  right: 24px;
+  bottom: 98px;
   width: 220px;
 }
 
-.wf-doc-card {
-  top: 142px;
-  left: 40px;
-  width: 238px;
+.wf-mini-card--route {
+  grid-template-columns: auto 1fr;
 }
 
-.wf-avatar,
-.wf-doc-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(34, 193, 195, 0.14));
-}
-
-.wf-person-card strong,
-.wf-doc-card strong,
-.wf-events-card strong,
-.wf-summary-card strong {
+.wf-info-card strong,
+.wf-mini-card strong,
+.wf-metric-card strong,
+.wf-status-rail strong {
   display: block;
   font-family: "Lexend", sans-serif;
   font-size: 0.95rem;
 }
 
-.wf-person-card span,
-.wf-doc-card span,
-.wf-events-card span,
-.wf-summary-card span {
+.wf-info-card span,
+.wf-mini-card span,
+.wf-metric-card span,
+.wf-status-rail span {
   color: var(--muted);
   font-size: 0.86rem;
 }
 
-.wf-face-frame {
-  top: 60px;
-  right: 42px;
-  width: 154px;
-  height: 154px;
-  border-radius: 34px;
-  border: 2px solid rgba(14, 165, 233, 0.38);
-  background: rgba(255, 255, 255, 0.5);
-  overflow: hidden;
+.wf-icon-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
 }
 
-.wf-face-frame__beam {
+.wf-icon-bubble .wf-glyph,
+.wf-node .wf-glyph,
+.wf-avatar-spot .wf-glyph,
+.wf-alert-burst .wf-glyph,
+.wf-time-rail .wf-glyph,
+.wf-metric-card .wf-glyph {
+  width: 28px;
+  height: 28px;
+}
+
+.wf-icon-bubble--worker,
+.wf-node--worker,
+.wf-avatar-spot--worker {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+}
+
+.wf-icon-bubble--badge,
+.wf-time-rail,
+.wf-metric-card--pay {
+  background: rgba(255, 255, 255, 0.96);
+  color: #1d4ed8;
+}
+
+.wf-icon-bubble--alert,
+.wf-alert-burst {
+  background: rgba(245, 158, 11, 0.14);
+  color: #b45309;
+}
+
+.wf-info-card--person {
+  top: 42px;
+  left: 28px;
+  width: 232px;
+}
+
+.wf-info-card--doc {
+  top: 146px;
+  left: 44px;
+  width: 244px;
+}
+
+.wf-info-card--alert {
+  right: 28px;
+  top: 112px;
+  width: 224px;
+}
+
+.wf-face-panel {
+  position: absolute;
+  top: 56px;
+  right: 36px;
+  width: 170px;
+  height: 170px;
+  border-radius: 34px;
+  border: 2px solid rgba(14, 165, 233, 0.28);
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--primary);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.wf-face-panel .wf-glyph {
+  width: 92px;
+  height: 92px;
+}
+
+.wf-face-panel__scan {
   position: absolute;
   inset: 0;
   transform: translateY(-100%);
@@ -870,210 +1052,220 @@ main {
   animation: wf-scan 900ms ease-out 460ms 1 both;
 }
 
-.wf-status-pill {
-  right: 34px;
-  bottom: 58px;
-}
-
-.wf-user-node,
-.wf-phone-node,
-.wf-helmet-node {
-  display: grid;
-  place-items: center;
-  width: 92px;
-  height: 92px;
+.wf-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 98px;
+  height: 98px;
   border-radius: 26px;
+  background: rgba(255, 255, 255, 0.9);
   font-weight: 700;
   box-shadow: 0 18px 36px rgba(52, 104, 168, 0.08);
 }
 
-.wf-user-node {
-  left: 34px;
-  top: 116px;
-  background: rgba(14, 165, 233, 0.14);
-  color: var(--primary);
+.wf-node span {
+  font-size: 0.88rem;
 }
 
-.wf-phone-node {
+.wf-node--worker {
+  left: 34px;
+  top: 116px;
+}
+
+.wf-node--phone {
   left: 186px;
   top: 146px;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
   color: #1d4ed8;
 }
 
-.wf-helmet-node {
+.wf-node--helmet {
   right: 44px;
   top: 92px;
-  background: rgba(34, 193, 195, 0.16);
+  background: rgba(212, 252, 247, 0.84);
   color: #0f766e;
 }
 
-.wf-link {
-  height: 8px;
-  border-radius: 999px;
-  transform-origin: left center;
-  background: linear-gradient(90deg, rgba(14, 165, 233, 0.8), rgba(34, 193, 195, 0.52));
+.wf-link-path {
+  --wf-dash: 220;
+  fill: none;
+  stroke: rgba(37, 99, 235, 0.72);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
 }
 
-.wf-link--user-phone {
-  left: 122px;
-  top: 162px;
-  width: 92px;
-}
-
-.wf-link--phone-helmet {
-  left: 278px;
-  top: 150px;
-  width: 92px;
-}
-
-.wf-nfc-ring {
-  left: 212px;
-  top: 132px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid rgba(14, 165, 233, 0.45);
-}
-
-.wf-check-badge {
-  right: 36px;
-  bottom: 54px;
-}
-
-.wf-monitor-fence,
-.wf-events-fence {
-  inset: 42px 34px 104px;
-  border-radius: 32px 52px 42px 58px;
-  border: 2px dashed rgba(14, 165, 233, 0.34);
-}
-
-.wf-monitor-person,
-.wf-events-person {
-  width: 78px;
-  height: 78px;
-  border-radius: 24px;
-  background: rgba(14, 165, 233, 0.14);
-  box-shadow: 0 18px 36px rgba(52, 104, 168, 0.08);
-}
-
-.wf-monitor-person {
-  left: 98px;
-  top: 146px;
-}
-
-.wf-monitor-helmet {
+.wf-nfc-waves {
   position: absolute;
-  left: 188px;
-  top: 116px;
-  width: 74px;
-  height: 74px;
-  border-radius: 24px;
-  background: rgba(34, 193, 195, 0.14);
+  left: 208px;
+  top: 126px;
+  width: 56px;
+  height: 56px;
+}
+
+.wf-nfc-waves span {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 99, 235, 0.4);
+  opacity: 0;
+}
+
+.wf-avatar-spot {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border-radius: 28px;
   box-shadow: 0 18px 36px rgba(52, 104, 168, 0.08);
 }
 
-.wf-monitor-dot {
+.wf-avatar-spot--worker {
+  left: 104px;
+  top: 138px;
+}
+
+.wf-avatar-spot--helmet {
+  left: 198px;
+  top: 104px;
+  background: rgba(212, 252, 247, 0.88);
+  color: #0f766e;
+}
+
+.wf-avatar-spot--alert {
+  left: 126px;
+  top: 132px;
+}
+
+.wf-locator {
+  position: absolute;
   left: 316px;
   top: 154px;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+}
+
+.wf-locator__pulse,
+.wf-locator__dot {
+  position: absolute;
+  inset: 0;
+}
+
+.wf-locator__dot {
   border-radius: 50%;
   background: var(--primary);
 }
 
-.wf-monitor-bar,
-.wf-hours-bar {
+.wf-locator__pulse {
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.22);
+}
+
+.wf-status-rail {
   left: 36px;
   right: 36px;
-  bottom: 72px;
-  height: 16px;
+  bottom: 42px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+.wf-status-rail__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wf-status-rail__label span {
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.wf-status-rail__label strong {
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+.wf-status-rail__bar,
+.wf-time-rail__bar {
+  height: 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(224, 237, 248, 0.8);
   overflow: hidden;
 }
 
-.wf-monitor-bar span,
-.wf-hours-bar span {
+.wf-status-rail__bar span,
+.wf-time-rail__bar span {
   display: block;
   width: 100%;
   height: 100%;
   transform-origin: left center;
   transform: scaleX(0);
-  background: linear-gradient(90deg, rgba(14, 165, 233, 0.78), rgba(34, 193, 195, 0.66));
-  animation: wf-fill-bar 820ms ease-out 680ms both;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.78), rgba(20, 184, 166, 0.66));
 }
 
-.wf-monitor-label {
-  left: 36px;
-  bottom: 32px;
-}
-
-.wf-events-person {
-  left: 120px;
-  top: 134px;
-}
-
-.wf-events-alert {
+.wf-alert-burst {
   display: grid;
   place-items: center;
   top: 92px;
-  left: 180px;
-  width: 48px;
-  height: 48px;
+  left: 190px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: rgba(239, 68, 68, 0.14);
-  color: #dc2626;
-  font-weight: 800;
-  font-size: 1.25rem;
 }
 
-.wf-events-card {
+.wf-time-rail {
+  top: 48px;
+  left: 30px;
   right: 30px;
-  top: 110px;
-  width: 220px;
+  padding: 14px 18px;
+  grid-template-columns: auto 1fr auto;
+  color: var(--primary);
 }
 
-.wf-events-state {
-  right: 34px;
-  bottom: 42px;
-  color: #b45309;
+.wf-time-rail strong {
+  color: var(--primary);
+  font-size: 0.98rem;
 }
 
-.wf-hours-bar {
-  bottom: auto;
-  top: 66px;
+.wf-metric-card {
+  position: absolute;
+  width: 124px;
+  min-height: 112px;
+  align-items: start;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
-.wf-summary-card--left {
+.wf-metric-card--hours {
   left: 34px;
   top: 126px;
-  width: 124px;
 }
 
-.wf-summary-card--mid {
+.wf-metric-card--pay {
   left: 178px;
   top: 126px;
-  width: 134px;
+  width: 136px;
 }
 
-.wf-summary-card--right {
+.wf-metric-card--machine {
   right: 34px;
   top: 126px;
   width: 136px;
 }
 
-.wf-ledger-card {
-  left: 50%;
-  bottom: 48px;
-  transform: translateX(-50%);
-  min-width: 188px;
-}
-
 .workflow-stage.is-reduced .wf-anim,
-.workflow-stage.is-reduced .wf-face-frame__beam,
-.workflow-stage.is-reduced .wf-monitor-bar span,
-.workflow-stage.is-reduced .wf-hours-bar span {
+.workflow-stage.is-reduced .wf-face-panel__scan,
+.workflow-stage.is-reduced .wf-status-rail__bar span,
+.workflow-stage.is-reduced .wf-time-rail__bar span,
+.workflow-stage.is-reduced .wf-anim--ring-pair span {
   animation-duration: 0.01ms !important;
   animation-delay: 0s !important;
   animation-iteration-count: 1 !important;
@@ -1176,6 +1368,17 @@ main {
   }
   to {
     transform: scaleX(1);
+  }
+}
+
+@keyframes wf-stroke-draw {
+  from {
+    opacity: 0.2;
+    stroke-dashoffset: var(--wf-dash, 400);
+  }
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
   }
 }
 
@@ -1602,14 +1805,41 @@ main {
     padding: 18px;
   }
 
-  .wf-events-card {
-    width: 188px;
+  .wf-face-panel {
+    width: 148px;
+    height: 148px;
+    right: 22px;
   }
 
-  .wf-summary-card--left,
-  .wf-summary-card--mid,
-  .wf-summary-card--right {
+  .wf-info-card--person,
+  .wf-info-card--doc,
+  .wf-info-card--alert,
+  .wf-mini-card {
+    width: 196px;
+  }
+
+  .wf-node {
+    width: 88px;
+    height: 88px;
+  }
+
+  .wf-node--phone {
+    left: 176px;
+  }
+
+  .wf-avatar-spot {
+    width: 78px;
+    height: 78px;
+  }
+
+  .wf-metric-card--hours,
+  .wf-metric-card--pay,
+  .wf-metric-card--machine {
     width: 110px;
+  }
+
+  .wf-metric-card--pay {
+    left: 166px;
   }
 
   .hero-stage__signal {

@@ -37,13 +37,27 @@ export type WorkflowAnimationVariant =
   | "events"
   | "settlement";
 
+export type WorkflowActorVisual =
+  | "map"
+  | "worker"
+  | "phone"
+  | "helmet"
+  | "badge"
+  | "face"
+  | "alert"
+  | "ledger"
+  | "clock"
+  | "machine";
+
 export type WorkflowDemoScene = {
   stepId: string;
   sceneTitle: string;
   statusText: string;
   resultMetrics: string[];
   actors: string[];
+  actorVisuals: WorkflowActorVisual[];
   animationVariant: WorkflowAnimationVariant;
+  resultBadge: string;
 };
 
 export type SafetyEvent = {

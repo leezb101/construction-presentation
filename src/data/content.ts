@@ -144,7 +144,9 @@ export const workflowDemoScenes: WorkflowDemoScene[] = [
     statusText: "地图底板加载后，线路围栏自动描绘并锁定项目边界。",
     resultMetrics: ["围栏已建立", "边界可追溯", "规则已生效"],
     actors: ["地图底板", "项目围栏", "规则标识"],
+    actorVisuals: ["map", "badge", "worker"],
     animationVariant: "fence",
+    resultBadge: "规则已建立",
   },
   {
     stepId: "archive",
@@ -152,7 +154,9 @@ export const workflowDemoScenes: WorkflowDemoScene[] = [
     statusText: "人物卡片、证件资料与人脸识别框依次进入，档案状态切为已完成。",
     resultMetrics: ["实名档案", "人脸通过", "资料完整"],
     actors: ["人员卡", "证件卡", "人脸扫描框"],
+    actorVisuals: ["worker", "face", "badge"],
     animationVariant: "archive",
+    resultBadge: "校验完成",
   },
   {
     stepId: "check-in",
@@ -160,7 +164,9 @@ export const workflowDemoScenes: WorkflowDemoScene[] = [
     statusText: "手机、人员、安全帽通过 NFC 波纹和连线建立当班关系。",
     resultMetrics: ["签到完成", "NFC 绑定", "当班生效"],
     actors: ["施工人员", "手机终端", "智能安全帽"],
+    actorVisuals: ["worker", "phone", "helmet"],
     animationVariant: "check-in",
+    resultBadge: "绑定成功",
   },
   {
     stepId: "monitor",
@@ -168,7 +174,9 @@ export const workflowDemoScenes: WorkflowDemoScene[] = [
     statusText: "围栏内定位点与安全帽状态同步脉冲，系统进入持续监测。",
     resultMetrics: ["双定位在线", "佩戴正常", "工时累计中"],
     actors: ["围栏区域", "定位点", "状态条"],
+    actorVisuals: ["map", "worker", "helmet"],
     animationVariant: "monitor",
+    resultBadge: "持续在岗",
   },
   {
     stepId: "events",
@@ -176,7 +184,9 @@ export const workflowDemoScenes: WorkflowDemoScene[] = [
     statusText: "人物偏离或跌倒触发告警，班组长通知卡弹出等待现场核验。",
     resultMetrics: ["异常识别", "通知已发", "待现场核验"],
     actors: ["人员状态", "告警图标", "通知卡"],
+    actorVisuals: ["worker", "alert", "badge"],
     animationVariant: "events",
+    resultBadge: "待核验",
   },
   {
     stepId: "settlement",
@@ -184,7 +194,9 @@ export const workflowDemoScenes: WorkflowDemoScene[] = [
     statusText: "时间、工时与费用卡逐步汇总，最终形成工资拨付支撑台账。",
     resultMetrics: ["工时已汇总", "台账已生成", "结算可支撑"],
     actors: ["工时条", "费用卡", "支撑台账"],
+    actorVisuals: ["clock", "ledger", "machine"],
     animationVariant: "settlement",
+    resultBadge: "结算支撑已生成",
   },
 ];
 

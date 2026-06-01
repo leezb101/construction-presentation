@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { workflowDemoScenes, workflowSteps } from "../../data/content";
 import { GlassCard, Pill, Section } from "../common";
 import { WorkflowTimeline } from "../visuals/WorkflowTimeline";
-import { WorkflowDemoStage } from "../visuals/WorkflowDemoStage";
+import { WorkflowActorPills, WorkflowDemoStage } from "../visuals/WorkflowDemoStage";
 
 export function WorkflowSection() {
   const [activeStepId, setActiveStepId] = useState(workflowSteps[0].id);
@@ -69,11 +69,7 @@ export function WorkflowSection() {
 
         <div className="workflow-layout__stage">
           <WorkflowDemoStage scene={activeScene} playToken={playToken} />
-          <div className="workflow-actors">
-            {activeScene.actors.map((actor) => (
-              <span key={actor}>{actor}</span>
-            ))}
-          </div>
+          <WorkflowActorPills scene={activeScene} />
         </div>
       </div>
     </Section>
