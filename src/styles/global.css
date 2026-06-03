@@ -216,9 +216,9 @@ main {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  grid-template-columns: minmax(0, 1.14fr) minmax(320px, 0.86fr);
   align-items: center;
-  gap: 42px;
+  gap: 52px;
   min-height: calc(100vh - var(--nav-offset));
 }
 
@@ -248,7 +248,12 @@ main {
 .hero h1 {
   margin-top: 18px;
   font-size: clamp(2.9rem, 6vw, 5.3rem);
-  line-height: 0.95;
+  line-height: 0.92;
+  max-width: 10.8ch;
+}
+
+.hero-title-line {
+  display: block;
 }
 
 .hero p,
@@ -1084,26 +1089,38 @@ main {
 }
 
 .wf-node--helmet {
-  right: 44px;
+  left: 338px;
   top: 92px;
   background: rgba(212, 252, 247, 0.84);
   color: #0f766e;
 }
 
-.wf-link-path {
-  --wf-dash: 220;
-  fill: none;
-  stroke: rgba(37, 99, 235, 0.72);
-  stroke-width: 5.5;
-  stroke-linecap: round;
-  stroke-dasharray: 220;
-  stroke-dashoffset: 220;
+.wf-link-segment {
+  position: absolute;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.72);
+  transform-origin: left center;
+}
+
+.wf-link-segment--worker-phone {
+  left: 126px;
+  top: 173px;
+  width: 116px;
+  transform: rotate(11deg);
+}
+
+.wf-link-segment--phone-helmet {
+  left: 282px;
+  top: 160px;
+  width: 114px;
+  transform: rotate(-22deg);
 }
 
 .wf-nfc-waves {
   position: absolute;
-  left: 208px;
-  top: 126px;
+  left: 246px;
+  top: 132px;
   width: 56px;
   height: 56px;
 }
@@ -2550,6 +2567,8 @@ main {
 
   .hero h1 {
     font-size: 2.4rem;
+    max-width: none;
+    text-wrap: pretty;
   }
 
   .section-heading h2 {
@@ -2620,6 +2639,88 @@ main {
   .hero-stage__signal--machine {
     left: 132px;
     bottom: 98px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .top-nav-shell,
+  main {
+    width: min(1440px, calc(100% - 56px));
+  }
+
+  .hero,
+  .section {
+    padding-left: 44px;
+    padding-right: 44px;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1.16fr) minmax(420px, 0.84fr);
+    gap: 56px;
+  }
+
+  .hero h1 {
+    font-size: clamp(4.2rem, 5vw, 6.5rem);
+    max-width: 12.2ch;
+    line-height: 0.93;
+  }
+
+  .hero-title-line--lead {
+    white-space: nowrap;
+  }
+
+  .hero-copy > p {
+    max-width: 48rem;
+    font-size: 1.16rem;
+    line-height: 1.8;
+  }
+
+  .hero-highlights div {
+    padding: 18px 20px;
+  }
+
+  .hero-highlights span {
+    font-size: 0.96rem;
+  }
+
+  .hero-highlights strong {
+    font-size: 1.18rem;
+  }
+
+  .metric-card strong,
+  .pain-card__impact strong,
+  .capability-card strong,
+  .value-card strong,
+  .machine-summary__card strong {
+    font-size: 1.42rem;
+  }
+
+  .metric-card p,
+  .pain-card p,
+  .capability-card p,
+  .value-card p,
+  .machine-summary__card p,
+  .workflow-detail p,
+  .alert-panel p,
+  .roadmap-card p,
+  .section-heading p {
+    font-size: 1.04rem;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(2.3rem, 3vw, 3.7rem);
+  }
+
+  .top-nav nav a {
+    font-size: 0.98rem;
+  }
+
+  .brand-mark strong {
+    font-size: 1.04rem;
+  }
+
+  .brand-mark span {
+    font-size: 0.86rem;
   }
 }
 

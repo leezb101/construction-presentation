@@ -14,9 +14,9 @@ export function HeroSection() {
           animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          面向线性工地的
-          <br />
-          人员与机械一体化管理汇报站
+          <span className="hero-title-line">面向线性工地的</span>
+          <span className="hero-title-line hero-title-line--lead">人员与机械</span>
+          <span className="hero-title-line">一体化管理系统</span>
         </motion.h1>
         <motion.p
           initial={reduceMotion ? false : { opacity: 0, y: 28 }}

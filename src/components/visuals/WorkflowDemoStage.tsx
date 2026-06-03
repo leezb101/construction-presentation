@@ -163,13 +163,8 @@ function CheckInScene({ resultBadge }: { resultBadge: string }) {
         <HelmetIcon />
         <span>安全帽</span>
       </div>
-      <svg viewBox="0 0 420 240" className="wf-links" aria-hidden="true">
-        <path className="wf-link-path wf-anim wf-anim--draw-stroke" d="M126 156C154 150 172 150 201 156" />
-        <path
-          className="wf-link-path wf-anim wf-anim--draw-stroke-delayed"
-          d="M254 156C286 148 318 138 344 116"
-        />
-      </svg>
+      <div className="wf-link-segment wf-link-segment--worker-phone wf-anim wf-anim--grow-line" aria-hidden="true" />
+      <div className="wf-link-segment wf-link-segment--phone-helmet wf-anim wf-anim--grow-line-late" aria-hidden="true" />
       <div className="wf-nfc-waves wf-anim wf-anim--ring-pair" aria-hidden="true">
         <span />
         <span />
