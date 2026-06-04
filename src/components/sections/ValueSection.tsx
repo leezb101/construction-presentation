@@ -7,7 +7,7 @@ export function ValueSection() {
       id="value"
       eyebrow="价值落地"
       title="先解决工资拨付和现场监管，再逐步沉淀成本基准"
-      description="本次汇报聚焦两条主线：一条是把人、帽、机与工时结算支撑打通；一条是把项目过程数据长期沉淀为未来管理与估算能力。"
+      description="当前阶段优先打通工资拨付与现场监管闭环，并同步沉淀项目过程数据，为后续成本管理和估算能力建设建立基础。"
     >
       <div className="value-grid">
         {valueMetrics.map((item) => (
@@ -22,7 +22,6 @@ export function ValueSection() {
       <GlassCard className="roadmap-card">
         <div className="roadmap-card__heading">
           <h3>当前进展与下一步</h3>
-          <p>保持口径克制，只呈现当前真实进度和明确方向。</p>
         </div>
         <div className="roadmap-list">
           {roadmap.map((item, index) => (
