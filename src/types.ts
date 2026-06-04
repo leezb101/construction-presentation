@@ -52,7 +52,6 @@ export type WorkflowActorVisual =
 export type WorkflowDemoScene = {
   stepId: string;
   sceneTitle: string;
-  statusText: string;
   resultMetrics: string[];
   actors: string[];
   actorVisuals: WorkflowActorVisual[];

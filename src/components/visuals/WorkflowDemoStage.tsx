@@ -48,7 +48,6 @@ export function WorkflowDemoStage({
         <div className="workflow-stage__footer">
           <div className="workflow-stage__copy">
             <span className="workflow-stage__eyebrow">{scene.sceneTitle}</span>
-            <p>{scene.statusText}</p>
           </div>
           <div className="workflow-stage__chips">
             {scene.resultMetrics.map((item) => (
