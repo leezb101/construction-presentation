@@ -2401,28 +2401,149 @@ main {
   padding: 24px;
 }
 
-.roadmap-item {
+.roadmap-card__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.roadmap-card__heading p {
+  max-width: 420px;
+}
+
+.roadmap-track {
+  position: relative;
   display: grid;
-  grid-template-columns: 52px 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.roadmap-track::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(37, 99, 235, 0.28) 0%,
+      rgba(37, 99, 235, 0.28) 66%,
+      rgba(245, 158, 11, 0.28) 66%,
+      rgba(245, 158, 11, 0.28) 100%
+    );
+}
+
+.roadmap-node {
+  position: relative;
+  display: grid;
   gap: 14px;
-  align-items: start;
-  padding: 16px 0;
-  border-top: 1px solid var(--line);
 }
 
-.roadmap-item:first-child {
-  border-top: 0;
+.roadmap-node__rail {
+  position: relative;
+  z-index: 1;
+  min-height: 48px;
 }
 
-.roadmap-item span {
+.roadmap-node__dot {
   display: inline-grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 16px;
-  color: var(--primary);
-  background: rgba(37, 99, 235, 0.08);
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
   font-family: "Lexend", sans-serif;
+  font-size: 1rem;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.roadmap-node__body {
+  display: grid;
+  gap: 12px;
+  min-height: 170px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.9));
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.roadmap-node__meta {
+  display: grid;
+  gap: 8px;
+}
+
+.roadmap-node__meta strong {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--ink-strong);
+}
+
+.roadmap-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.roadmap-node--progress .roadmap-node__dot {
+  color: #1d4ed8;
+  background: linear-gradient(135deg, rgba(219, 234, 254, 0.98), rgba(191, 219, 254, 0.92));
+}
+
+.roadmap-node--progress .roadmap-node__body {
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.roadmap-badge--progress {
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.roadmap-node--next .roadmap-node__dot {
+  color: #b45309;
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.98), rgba(253, 230, 138, 0.92));
+}
+
+.roadmap-node--next .roadmap-node__body {
+  border-color: rgba(245, 158, 11, 0.24);
+  background:
+    linear-gradient(180deg, rgba(255, 251, 235, 0.96), rgba(255, 247, 237, 0.9));
+}
+
+.roadmap-badge--next {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.roadmap-node:hover .roadmap-node__dot,
+.roadmap-node:hover .roadmap-node__body {
+  transform: translateY(-3px);
+}
+
+.roadmap-node:hover .roadmap-node__dot {
+  box-shadow: 0 20px 34px rgba(15, 23, 42, 0.14);
+}
+
+.roadmap-node:hover .roadmap-node__body {
+  box-shadow: 0 24px 42px rgba(15, 23, 42, 0.08);
 }
 
 @media (max-width: 1120px) {
@@ -2447,7 +2568,8 @@ main {
   }
 
   .pool-stage__head,
-  .pool-principle-bar {
+  .pool-principle-bar,
+  .roadmap-card__heading {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -2476,8 +2598,35 @@ main {
   .capability-grid,
   .value-grid,
   .workflow-nodes,
-  .safety-state-list {
+  .safety-state-list,
+  .roadmap-track {
     grid-template-columns: 1fr;
+  }
+
+  .roadmap-track::before {
+    top: 30px;
+    bottom: 30px;
+    left: 23px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(37, 99, 235, 0.28) 0%,
+        rgba(37, 99, 235, 0.28) 66%,
+        rgba(245, 158, 11, 0.28) 66%,
+        rgba(245, 158, 11, 0.28) 100%
+      );
+  }
+
+  .roadmap-node {
+    grid-template-columns: 48px 1fr;
+    align-items: start;
+  }
+
+  .roadmap-node__body {
+    min-height: 0;
   }
 
   .workflow-detail__title-row {
